@@ -1,0 +1,4 @@
+[submodule "test-client/Assets/Assambra/Plugins/ezyfox-server-csharp-client-unity-client"]
+	path = test-client/Assets/Assambra/Plugins/ezyfox-server-csharp-client-unity-client
+	url = https://github.com/youngmonkeys/ezyfox-server-csharp-client.git
+	branch = unity-client
