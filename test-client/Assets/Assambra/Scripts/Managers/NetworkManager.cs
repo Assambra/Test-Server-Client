@@ -24,6 +24,7 @@ public class NetworkManager : EzyDefaultController
         base.OnEnable();
         AddHandler<EzyObject>(Commands.PLAY, OnPlayResponse);
         AddHandler<EzyArray>(Commands.SYNC_POSITION, OnPlayerSyncPosition);
+        AddHandler<EzyObject>(Commands.ENTITY_SPAWN, OnEntitySpawn);
     }
 
     private void Update()
@@ -94,7 +95,10 @@ public class NetworkManager : EzyDefaultController
     {
         LOGGER.debug("OnPlayResponse");
         GameManager.Instance.ChangeScene(Scenes.World);
+    }
 
+    private void OnEntitySpawn(EzyAppProxy proxy, EzyObject data)
+    {
         string entityName = data.get<string>("entityName");
         bool isLocalPlayer = data.get<bool>("isLocalPlayer");
         EzyArray position = data.get<EzyArray>("position");

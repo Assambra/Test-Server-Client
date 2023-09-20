@@ -11,11 +11,11 @@ import lombok.Setter;
 @EzySingleton
 public class GameService extends EzyLoggable {
 
-    public EntitySpawnModel spawnModel(EzyUser user, Boolean isLocalPlayer, Vec3 position, Vec3 rotation)
+    public EntitySpawnModel spawnModel(String entityName, Boolean isLocalPlayer, Vec3 position, Vec3 rotation)
     {
 
         return EntitySpawnModel.builder()
-                .entityName(user.getName())
+                .entityName(entityName)
                 .isLocalPlayer(isLocalPlayer)
                 .position(position.toArray())
                 .rotation(rotation.toArray())

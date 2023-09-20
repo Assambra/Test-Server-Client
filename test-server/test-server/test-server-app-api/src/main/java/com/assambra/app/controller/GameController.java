@@ -14,6 +14,8 @@ import com.tvd12.gamebox.entity.MMOPlayer;
 import com.tvd12.gamebox.math.Vec3;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @EzyRequestController
 public class GameController extends EzyLoggable {
@@ -33,14 +35,47 @@ public class GameController extends EzyLoggable {
         Vec3 initialRotation = new Vec3(0,0,0);
 
         roomService.setPlayerPosition(player, initialPosition);
-        EntitySpawnModel entitySpawnModel = gameService.spawnModel(user, true, initialPosition, initialRotation);
 
         responseFactory.newObjectResponse()
                 .command(Commands.PLAY)
-                .param("entityName", user.getName())
-                .data(
-                        modelToResponseConverter.toResponse(entitySpawnModel))
                 .user(user)
                 .execute();
+        
+        EntitySpawnModel localPlayerSpawnModel = gameService.spawnModel(user.getName(), true, initialPosition, initialRotation);
+        responseFactory.newObjectResponse()
+                .command(Commands.ENTITY_SPAWN)
+                .param("entityName", user.getName())
+                .data(
+                        modelToResponseConverter.toResponse(localPlayerSpawnModel))
+                .user(user)
+                .execute();
+
+        List<String> nearByPlayers = player.getNearbyPlayerNames();
+        nearByPlayers.remove(user.getName());
+
+        EntitySpawnModel playerSpawnModel = gameService.spawnModel(user.getName(), false, initialPosition, initialRotation);
+        for (String playerName : nearByPlayers)
+        {
+            responseFactory.newObjectResponse()
+                    .command(Commands.ENTITY_SPAWN)
+                    .param("entityName", user.getName())
+                    .data(
+                            modelToResponseConverter.toResponse(playerSpawnModel))
+                    .usernames(nearByPlayers)
+                    .execute();
+        }
+
+        for(String playerName : nearByPlayers)
+        {
+            logger.info("PlayerName: {}", playerName);
+            EntitySpawnModel otherPlayerSpawnModel = gameService.spawnModel(playerName, false, initialPosition, initialRotation);
+            responseFactory.newObjectResponse()
+                    .command(Commands.ENTITY_SPAWN)
+                    .param("entityName", playerName)
+                    .data(
+                            modelToResponseConverter.toResponse(otherPlayerSpawnModel))
+                    .user(user)
+                    .execute();
+        }
     }
 }
