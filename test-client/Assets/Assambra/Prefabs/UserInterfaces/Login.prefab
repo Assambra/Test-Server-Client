@@ -992,7 +992,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1953020345550702609}
         m_TargetAssemblyTypeName: UILogin, Assembly-CSharp
         m_MethodName: OnButtonLogin
         m_Mode: 1
@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1953020345550702609}
         m_TargetAssemblyTypeName: UILogin, Assembly-CSharp
         m_MethodName: OnButtonQuit
         m_Mode: 1
