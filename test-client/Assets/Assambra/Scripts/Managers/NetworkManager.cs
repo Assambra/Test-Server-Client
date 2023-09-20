@@ -1,5 +1,6 @@
 using com.tvd12.ezyfoxserver.client;
 using com.tvd12.ezyfoxserver.client.constant;
+using com.tvd12.ezyfoxserver.client.entity;
 using com.tvd12.ezyfoxserver.client.request;
 using com.tvd12.ezyfoxserver.client.support;
 using com.tvd12.ezyfoxserver.client.unity;
@@ -20,6 +21,7 @@ public class NetworkManager : EzyDefaultController
     private new void OnEnable()
     {
         base.OnEnable();
+        AddHandler<EzyObject>(Commands.PLAY, OnPlayResponse);
     }
 
     private void Update()
@@ -36,6 +38,7 @@ public class NetworkManager : EzyDefaultController
 
         socketProxy.onLoginSuccess<Object>(HandleLoginSuccess);
         socketProxy.onAppAccessed<Object>(HandleAppAccessed);
+        socketProxy.onUdpHandshake<Object>(HandleUdpHandshake);
 
         // Login to socket server
         socketProxy.setLoginUsername(username);
@@ -45,7 +48,7 @@ public class NetworkManager : EzyDefaultController
         socketProxy.setUdpPort(socketConfigVariable.Value.UdpPort);
         socketProxy.setDefaultAppName(socketConfigVariable.Value.AppName);
         socketProxy.setTransportType(EzyTransportType.UDP);
-        socketProxy.onUdpHandshake<Object>(HandleUdpHandshake);
+        
 
         socketProxy.connect();
     }
@@ -70,5 +73,26 @@ public class NetworkManager : EzyDefaultController
     private void HandleAppAccessed(EzyAppProxy proxy, Object data)
     {
         LOGGER.debug("App access successfully");
+        PlayRequest();
     }
+
+    #region REQUESTS
+
+    private void PlayRequest()
+    {
+        LOGGER.debug("Send PlayRequest");
+        appProxy.send(Commands.PLAY);
+    }
+
+    #endregion
+
+    #region RESPONSE
+
+    private void OnPlayResponse(EzyAppProxy proxy, EzyObject data)
+    {
+        LOGGER.debug("OnPlayResponse");
+        GameManager.Instance.ChangeScene(Scenes.World);
+    }
+
+    #endregion
 }
