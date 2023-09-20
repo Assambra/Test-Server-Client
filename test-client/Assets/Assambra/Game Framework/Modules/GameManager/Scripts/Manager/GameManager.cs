@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 
     [field: SerializeField] public SceneHandler sceneHandler { get; private set; }
 
+    [SerializeField] private GameObject playerPrefab; 
+
+    private Dictionary<string, GameObject> players = new Dictionary<string, GameObject>();
 
     public void Awake()
     {
@@ -31,5 +34,20 @@ public class GameManager : MonoBehaviour
     private void OnSceneChanged()
     {
         Debug.Log("Scene changed");
+    }
+
+    public void SpawnEntity(string entityName, bool isLocalPlayer, Vector3 position, Vector3 rotation)
+    {
+        GameObject pgo = GameObject.Instantiate(playerPrefab, position, Quaternion.Euler(rotation));
+        players.Add(entityName, pgo);
+
+        Player player = pgo.GetComponent<Player>();
+        pgo.name = entityName;
+        player.PlayerName = pgo.name;
+
+        if(isLocalPlayer)
+        {
+            player.IsLocalPlayer = true;
+        }
     }
 }

@@ -1,6 +1,9 @@
 package com.assambra.app.controller;
 
 import com.assambra.app.constant.Commands;
+import com.assambra.app.converter.ModelToResponseConverter;
+import com.assambra.app.model.EntitySpawnModel;
+import com.assambra.app.service.GameService;
 import com.assambra.app.service.RoomService;
 import com.tvd12.ezyfox.core.annotation.EzyDoHandle;
 import com.tvd12.ezyfox.core.annotation.EzyRequestController;
@@ -17,6 +20,8 @@ public class GameController extends EzyLoggable {
 
     private final EzyResponseFactory responseFactory;
     private final RoomService roomService;
+    private final GameService gameService;
+    private final ModelToResponseConverter modelToResponseConverter;
 
     @EzyDoHandle(Commands.PLAY)
     public void play(EzyUser user)
@@ -25,11 +30,16 @@ public class GameController extends EzyLoggable {
 
         MMOPlayer player = roomService.AddUser(user);
         Vec3 initialPosition = new Vec3(500,0,500);
+        Vec3 initialRotation = new Vec3(0,0,0);
 
         roomService.setPlayerPosition(player, initialPosition);
+        EntitySpawnModel entitySpawnModel = gameService.spawnModel(user, true, initialPosition, initialRotation);
 
         responseFactory.newObjectResponse()
                 .command(Commands.PLAY)
+                .param("entityName", user.getName())
+                .data(
+                        modelToResponseConverter.toResponse(entitySpawnModel))
                 .user(user)
                 .execute();
     }

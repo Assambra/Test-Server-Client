@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8730130986524221385}
   - component: {fileID: 5632488526100672898}
-  - component: {fileID: 2588745371697924048}
+  - component: {fileID: 3462992134203493952}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -60,7 +60,7 @@ CharacterController:
   m_SkinWidth: 0.03
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &2588745371697924048
+--- !u!114 &3462992134203493952
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,18 +69,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1266403401945795627}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9585ecb06526de448b9e3dbcc7d2a048, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ac1fd6da85f69c4eaa8c897d7caf7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsWalking: 0
-  cameraController: {fileID: 0}
+  IsLocalPlayer: 0
   characterController: {fileID: 5632488526100672898}
-  animator: {fileID: 0}
-  verticalState: 0
-  horizontalState: 0
-  movementSpeed: 10
-  rotationSpeed: 150
-  jumpHeight: 2
 --- !u!1 &1731544079365938960
 GameObject:
   m_ObjectHideFlags: 0

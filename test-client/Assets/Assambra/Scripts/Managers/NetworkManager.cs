@@ -94,6 +94,16 @@ public class NetworkManager : EzyDefaultController
     {
         LOGGER.debug("OnPlayResponse");
         GameManager.Instance.ChangeScene(Scenes.World);
+
+        string entityName = data.get<string>("entityName");
+        bool isLocalPlayer = data.get<bool>("isLocalPlayer");
+        EzyArray position = data.get<EzyArray>("position");
+        EzyArray rotation = data.get<EzyArray>("rotation");
+
+        Vector3 initalPosition = new Vector3(position.get<float>(0), position.get<float>(1), position.get<float>(2));
+        Vector3 initalRotation = new Vector3(rotation.get<float>(0), rotation.get<float>(1), rotation.get<float>(2));
+
+        GameManager.Instance.SpawnEntity(entityName, isLocalPlayer, initalPosition, initalRotation);
     }
 
     private void OnPlayerSyncPosition(EzyAppProxy proxy, EzyArray data)
