@@ -6,9 +6,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [field: SerializeField] public SceneHandler sceneHandler { get; private set; }
+    [field: SerializeField] public CameraController cameraController { get; private set; }
 
-    [SerializeField] private GameObject playerPrefab; 
-
+    [SerializeField] private GameObject playerPrefab;
+    
     private Dictionary<string, GameObject> players = new Dictionary<string, GameObject>();
 
     public void Awake()
@@ -19,6 +20,11 @@ public class GameManager : MonoBehaviour
             Instance = this;
 
         SceneHandler.OnSceneChanged += OnSceneChanged;
+    }
+
+    private void Start()
+    {
+        cameraController.ChangeCameraPreset("PreGameCamera");
     }
 
     private void OnDestroy()
@@ -48,6 +54,8 @@ public class GameManager : MonoBehaviour
         if(isLocalPlayer)
         {
             player.IsLocalPlayer = true;
+            cameraController.ChangeCameraPreset("GameCamera");
+            cameraController.CameraTarget = pgo;
         }
     }
 }
