@@ -6,6 +6,7 @@ using com.tvd12.ezyfoxserver.client.support;
 using com.tvd12.ezyfoxserver.client.unity;
 using Object = System.Object;
 using UnityEngine;
+using com.tvd12.ezyfoxserver.client.factory;
 
 public class NetworkManager : EzyDefaultController
 {
@@ -25,6 +26,7 @@ public class NetworkManager : EzyDefaultController
         AddHandler<EzyObject>(Commands.PLAY, OnPlayResponse);
         AddHandler<EzyArray>(Commands.SYNC_POSITION, OnPlayerSyncPosition);
         AddHandler<EzyObject>(Commands.ENTITY_SPAWN, OnEntitySpawn);
+        
     }
 
     private void Update()
@@ -87,6 +89,25 @@ public class NetworkManager : EzyDefaultController
         appProxy.send(Commands.PLAY);
     }
 
+
+    public void SendPlayerInput(int time, bool[] inputs, Quaternion rotation, Vector3 transformForward)
+    {
+        EzyObject data = EzyEntityFactory
+            .newObjectBuilder()
+            .append("t", time)
+            .append("i", inputs)
+            .append(
+                "r",
+                EzyEntityFactory.newArrayBuilder()
+                    .append(rotation.eulerAngles.x)
+                    .append(rotation.eulerAngles.y)
+                    .append(rotation.eulerAngles.z)
+                    .build()
+            )
+            .build();
+        appProxy.send(Commands.PLAYER_INPUT, data);
+    }
+
     #endregion
 
     #region RESPONSE
@@ -129,6 +150,13 @@ public class NetworkManager : EzyDefaultController
         );
 
         LOGGER.debug("SyncPosition for player: " + playerName + " reseive position: " + position + ", rotation: " + rotation + " time: " + time);
+
+        GameManager.Instance.MoveEntity(playerName, position, Quaternion.Euler(rotation));
+    }
+
+    private void OnError(EzyAppProxy proxy, EzyArray data)
+    {
+        LOGGER.error("Error: " + data);
     }
 
     #endregion

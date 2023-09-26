@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnEntity(string entityName, bool isLocalPlayer, Vector3 position, Vector3 rotation)
     {
-        GameObject pgo = GameObject.Instantiate(playerPrefab, position, Quaternion.Euler(rotation));
+        GameObject pgo = GameObject.Instantiate(playerPrefab); //position, Quaternion.Euler(rotation));
         players.Add(entityName, pgo);
 
         Player player = pgo.GetComponent<Player>();
@@ -57,5 +58,14 @@ public class GameManager : MonoBehaviour
             cameraController.ChangeCameraPreset("GameCamera");
             cameraController.CameraTarget = pgo;
         }
+    }
+
+    public void MoveEntity(string playerName, Vector3 position, Quaternion rotation)
+    {
+        GameObject playerGameObject = players[playerName];
+        Player player = playerGameObject.GetComponent<Player>();
+        //player.characterController.Move(position);
+        player.transform.position = position;
+        player.transform.rotation = rotation;
     }
 }

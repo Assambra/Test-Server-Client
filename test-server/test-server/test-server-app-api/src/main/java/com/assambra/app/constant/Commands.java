@@ -8,6 +8,7 @@ public final class Commands {
     public static final String PLAY = "play";
     public static final String ENTITY_SPAWN = "entitySpawn";
     public static final String ENTYTY_DESPAWN = "entityDespawn";
+    public static final String PLAYER_INPUT = "playerInput";
 
     private Commands() {}
 }

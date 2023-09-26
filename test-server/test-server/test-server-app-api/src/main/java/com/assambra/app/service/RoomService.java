@@ -31,13 +31,17 @@ public class RoomService extends EzyLoggable {
         return player;
     }
 
-    public void setPlayerPosition(MMOPlayer player, Vec3 initialPosition) {
+    public void setPlayerPosition(MMOPlayer player, Vec3 position) {
         MMOGridRoom currentRoom = (MMOGridRoom) getCurrentRoom(player);
-        currentRoom.setPlayerPosition(player, initialPosition);
+        currentRoom.setPlayerPosition(player, position);
     }
 
     public NormalRoom getCurrentRoom(Player player) {
         long currentRoomId = player.getCurrentRoomId();
         return globalRoomManager.getRoom(currentRoomId);
+    }
+
+    public MMOPlayer getPlayer(String playerName) {
+        return (MMOPlayer) globalPlayerManager.getPlayer(playerName);
     }
 }

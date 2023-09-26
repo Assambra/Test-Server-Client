@@ -180,52 +180,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 504350cd00bff044faced6ef16b53f55, type: 3}
---- !u!1 &236559307
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 236559309}
-  - component: {fileID: 236559308}
-  m_Layer: 0
-  m_Name: EzyLoggerFactory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &236559308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 236559307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afd7a61be90fbbe41b772e34b8dc56d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loggerLevel: 2
-  jsDebug: 0
---- !u!4 &236559309
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 236559307}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &486481341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -745,7 +699,6 @@ SceneRoots:
   - {fileID: 1307957091}
   - {fileID: 1781052636}
   - {fileID: 1118867145}
-  - {fileID: 236559309}
   - {fileID: 46542609}
   - {fileID: 486481341}
   - {fileID: 2018519971}
