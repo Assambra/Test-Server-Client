@@ -17,6 +17,6 @@ MonoBehaviour:
     zoneName: test-server
     appName: test-server
     webSocketUrl: 
-    tcpUrl: 127.0.0.1:3005
+    tcpUrl: 178.63.237.228:3005
     udpPort: 2611
     udpUsage: 1
