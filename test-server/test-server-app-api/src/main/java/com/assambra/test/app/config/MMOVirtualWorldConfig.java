@@ -18,7 +18,7 @@ public class MMOVirtualWorldConfig extends EzyLoggable {
     @EzySingleton
     public MMOVirtualWorld mmoVirtualWorld() {
         logger.info("Initialize MMO Virtual World");
-        return MMOVirtualWorld.builder().build();
+        return MMOVirtualWorld.builder().timeTickMillis(25).build();
     }
 
     @EzySingleton
