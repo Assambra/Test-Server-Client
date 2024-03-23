@@ -1,5 +1,6 @@
 package com.assambra.test.app.config;
 
+import com.assambra.test.app.UnityEngine.Time;
 import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyfox.bean.annotation.EzyConfigurationBefore;
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
@@ -17,6 +18,8 @@ public class WorldConfig extends EzyLoggable {
     MMOVirtualWorld mmoVirtualWorld;
     @EzyAutoBind
     MMORoomUpdatedHandler mmoRoomUpdatedHandler;
+    @EzyAutoBind
+    Time time;
 
     @EzySingleton
     public MMORoom world() {
@@ -29,6 +32,7 @@ public class WorldConfig extends EzyLoggable {
                 .distanceOfInterest(150)
                 .id(1)
                 .addRoomUpdatedHandler(mmoRoomUpdatedHandler)
+                .addRoomUpdatedHandler(time)
                 .build();
 
         synchronized (mmoVirtualWorld){
