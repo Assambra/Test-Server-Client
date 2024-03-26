@@ -1,5 +1,6 @@
 package com.assambra.test.app.config;
 
+import com.assambra.test.app.service.RoomService;
 import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyfox.bean.annotation.EzyConfigurationBefore;
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;

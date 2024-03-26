@@ -6,12 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Assambra/Scenes/Persistent.unity
-    guid: 518a187a2fb7b0a4ab0dab2fd09048f3
-  - enabled: 1
-    path: Assets/Assambra/Scenes/Login.unity
-    guid: c67405542ae524647906c649247e308f
-  - enabled: 1
-    path: Assets/Assambra/Scenes/World.unity
-    guid: a71e3f853c91b16449951b57f9203bf2
+    path: Assets/Server/Scenes/World.unity
+    guid: 895a10b49b620c74da25aeb4d06652cf
   m_configObjects: {}

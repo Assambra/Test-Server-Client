@@ -1,6 +1,7 @@
 package com.assambra.test.app.config;
 
 import com.assambra.test.app.UnityEngine.Time;
+import com.assambra.test.app.server.UnityServerStarter;
 import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyfox.bean.annotation.EzyConfigurationBefore;
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
@@ -40,6 +41,10 @@ public class WorldConfig extends EzyLoggable {
         }
 
         room.setStatus(RoomStatus.PLAYING);
+
+        UnityServerStarter serverStarter = new UnityServerStarter();
+        serverStarter.spawnUnityServer("ServerWorld","123456");
+
         return room;
     }
 }
